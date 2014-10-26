@@ -1,0 +1,33 @@
+# Project: sim51e
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = obj/sim51e_private.res
+OBJ  = obj/sim51e.o $(RES)
+LINKOBJ  = obj/sim51e.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib"  -g3 
+INCS =  -I"C:/Dev-Cpp/include"  -I"C:/Project51/exec" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"C:/Project51/exec" 
+BIN  = bin/sim51e.exe
+CXXFLAGS = $(CXXINCS)   -g3
+CFLAGS = $(INCS)   -g3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before bin/sim51e.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "bin\sim51e.exe" $(LIBS)
+
+obj/sim51e.o: sim51e.cpp
+	$(CPP) -c sim51e.cpp -o obj/sim51e.o $(CXXFLAGS)
+
+obj/sim51e_private.res: sim51e_private.rc 
+	$(WINDRES) -i sim51e_private.rc --input-format=rc -o obj/sim51e_private.res -O coff 
